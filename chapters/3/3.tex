@@ -1,0 +1,475 @@
+\providecommand{\main}{../../main}
+\providecommand{\figpath}[1]{\main/../lessons/#1}
+\documentclass[../../main/main.tex]{subfiles}
+
+
+
+\begin{document}
+
+\begin{example}
+	Examples of Lie groups that we are going to use and their dimension:
+	\begin{itemize}
+		\item $\mathrm{GL}(N,\C)$\\
+			$M \in \mathrm{GL}(N,\C), \ \det{M} \ne 0$ ($M$: $N \times N$ complex matrices)\\
+			$n \equiv \dim{\mathrm{GL}(N,\C)} = \# \text{Free parameters} = 2 N^2$
+
+		\item $\mathrm{SL}(N,\C) \subseteq \mathrm{GL}(N,\C), \ \det{M} = 1$\\
+			$\dim{\mathrm{SL}(N,\C)} \equiv 2 N^2 - 1$
+
+		\item $\mathrm{GL}(N,\R)$, $n=N^2$
+
+		\item $\mathrm{GL}(N,\R)$, $n=N^2$
+
+		\item $\mathrm{SL}(N,\R)$, $n=N^2 - 1$
+
+		\item $\mathrm{U}(N)$, $n=N^2$
+
+		\item $\mathrm{SU}(N)$, $n=N^2 - 1$
+
+		\item $\mathrm{O}(N)$, $n=\frac{1}{2} N(N-1)$
+
+		\item $\mathrm{SO}(N)$, $n=\frac{1}{2} N(N-1)$
+
+		\item $U(l,N-l)$: \textbf{Complex unitary matrices} such that
+
+			\begin{minipage}[t]{0.45\textwidth}
+				\strut\vspace*{-1.5\baselineskip}\newline
+				\[
+				g =
+				\left(
+				\begin{array}{c|c}
+				\mathds{1}_{l \times l}
+				&	\\
+				\hline
+				&
+				\mathds{1}_{(N-l) \times (N-l)}
+				\end{array}
+				\right)
+				\]
+			\end{minipage}
+			%
+			\begin{minipage}[t]{0.45\textwidth}
+				$
+				UgU^{\dagger} = g	\qquad n=N^2
+				$\\
+				$
+				g_{kk} =
+				\begin{cases}
+				1	&	1 \le k \le l	\\
+				-1	&	l < k \le N
+				\end{cases}
+				$
+			\end{minipage}
+
+		\item $O(l,N-l)$: \textbf{Pseudo-orthogonal group}:
+			\begin{equation*}
+				OgO^{T} = g	\qquad	n=\frac{1}{2}N(N-1)
+			\end{equation*}
+			Example: Lorentz group $O(1,3)$.
+	\end{itemize}
+\end{example}
+
+
+
+
+\section{Rotation group: $O(3)$ and $SU(2)$}
+
+A spatial rotation in 3 dimensions can be described by the transformation:
+
+\begin{equation}
+	F' =
+	\begin{pmatrix}
+		x'	\\	y'	\\	z'
+	\end{pmatrix}
+	=
+	R
+	\begin{pmatrix}
+		x	\\	y	\\	z
+	\end{pmatrix}
+	=
+	R \vec{r}
+	\qquad
+	r'_i = R_{ij} r_j
+\end{equation}
+
+The $R$ matrix must preserve the distance from the origin, so the lenght of the vectors:
+
+\begin{equation*}
+	x'^2 + y'^2 + z'^2 = x^2 + y^2 + z^2
+\end{equation*}
+
+\begin{equation*}
+	(\vec{r}')^{T} \vec{r}' = (\vec{r})^{T} \vec{r}
+	\iff
+	\vec{r}^{T} R^{T} R \vec{r} = \vec{r}^{T} \vec{r}
+	\Longrightarrow
+	R^{T} R = \mathds{1}_{3 \times 3}
+\end{equation*}
+
+$R \in O(3)$ and $O(3)$ is a group. In fact:
+\begin{enumerate}
+	\item $(R_1 R_2)^{T} R_1 R_2 = R_2^{T} R_{1}^T R_1 R_2 = \mathds{1}$
+	\item $e = \mathds{1}$
+	\item Inverse element: $R^{-1}$, $\det{R} \ne 0$
+\end{enumerate}
+
+
+
+\subsection{Fundamental representation}
+It is given by the matrices acting on $\R^{3} = \mathbb{V}$. So a rotation around $z$-axis tansforms $\vec{v}$ as:
+
+\begin{equation*}
+	\vec{v}' =
+	\begin{pmatrix}
+		v'_x	\\	v'_y	\\	v'_z
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		\cos{\theta}	&	\sin{\theta}	&	0	\\
+		-\sin{\theta}	&	\cos{\theta}	&	0	\\
+		0				&					&	1
+	\end{pmatrix}
+	\begin{pmatrix}
+		v_x	\\	v_y	\\	v_z
+	\end{pmatrix}
+\end{equation*}
+\begin{equation*}
+	\vec{v}' = R_z(\theta)\vec{v}
+\end{equation*}
+
+Analogously, the rotation matrices around $x$ and $y$ axes are:
+
+\begin{equation*}
+	R_x(\phi) =
+	\begin{pmatrix}
+		1	&	0				&	0				\\
+		1	&	\cos{\phi}	&	\sin{\phi}	\\
+		0	&	-\sin{\phi}	&	\cos{\phi}
+	\end{pmatrix}
+	\qquad
+	R_y(\psi) =
+	\begin{pmatrix}
+		\cos{\psi}	&	0		&	-\sin{\psi}		\\
+		0			&	1		&	0				\\
+		\sin{\psi}	&	0		&	\cos{\psi}
+	\end{pmatrix}
+\end{equation*}
+
+It is important to remark that $O(3)$ is a non-abelian Lie group, in fact in general:
+\[
+	R_x(\phi) R_z(\theta) \ne R_z(\theta) R_x(\phi)
+\]
+
+
+
+\subsection{Generators of the group}
+By the application of the definition of generator, we obtain:
+
+\[
+	J_x \equiv J_1 =
+	\begin{pmatrix}
+		0	&	0	&	0	\\
+		0	&	0	&	-i	\\
+		0	&	i	&	0
+	\end{pmatrix}
+	\qquad
+	J_y \equiv J_2 =
+	\begin{pmatrix}
+		0	&	0	&	i	\\
+		0	&	0	&	0	\\
+		-i	&	0	&	0
+	\end{pmatrix}
+	\qquad
+	J_z \equiv J_3 =
+	\begin{pmatrix}
+		0	&	-i	&	0	\\
+		i	&	0	&	0	\\
+		0	&	0	&	0
+	\end{pmatrix}
+\]
+We note that $J_i, i=1,2,3$ is Hermitian, so $J_i^{\dagger} = J_i$. The commutator of the generators is:
+
+\begin{equation}
+	[J_i, J_j] = i \varepsilon_{ijk} J_k = i f_{ijk} J_k
+\end{equation}
+
+where $\varepsilon_{ijk}$ is the Levi-Civita pseudotensor, defined as:
+
+\begin{equation}
+	\varepsilon_{ijk} =
+	\begin{cases}
+		1	&	ijk=\text{Even permutation of 123}	\\
+		-1	&	ijk=\text{Odd permutation of 123}	\\
+		0	&	\text{otherwise}
+	\end{cases}
+\end{equation}
+
+
+
+\subsection{Finite and infinitesimal rotations}
+An infinitesimal rotation is described by the transformation through a rotation matrix by an infinitesimal angle $\delta \theta$. By expanding in Taylor series:
+
+\begin{equation}
+	R_z(\delta \theta) = \id + i \delta \theta J_z
+\end{equation}
+
+If we want to pass to a finite transformation, we have to consider the exponential representation:
+
+\begin{equation}
+	R_z(\theta) = \exp{i \theta J_z}
+\end{equation}
+
+For a general rotation around an axis $\vec{n} = (n_x, n_y, n_z)$:
+
+\begin{equation}
+	R_{\vec{n}}(\theta) = \exp{i \vec{\sigma} \cdot \vec{J}} = \exp{i \theta \vec{n} \cdot \vec{J}}
+\end{equation}
+
+
+
+
+\subsection{Special Unitary 2 $\times$ 2 matrices}
+Now we move to the group $SO(2)$, namely the group of special unitary $2 \times 2$ matrices ($UU^{\dagger} = U^{\dagger}U = \id$, $(U^{\dagger}) = (U^{-1})$, with $\det{U} = 1$). We can represent its element with:
+
+\begin{equation}
+	U =
+	\begin{pmatrix}
+		a	&	b	\\
+		-b^*&	a^*
+	\end{pmatrix}
+	\qquad
+	a,b \text{ complex numbers such that } \abs{a}^2 + \abs{b}^2 = 1
+	\Longrightarrow
+	n=3 \text{ dof}
+\end{equation}
+
+Thr generators of the group are denoted by $\Sigma^{a} = \frac{1}{2} \sigma^{a}$, where $\sigma^a$ are the Pauli matrices:
+
+\begin{equation*}
+	\sigma^1 =
+	\begin{pmatrix}
+		0	&	1	\\
+		1	&	0
+	\end{pmatrix}
+	\qquad
+	\sigma^2 =
+	\begin{pmatrix}
+		0	&	-i	\\
+		i	&	0
+	\end{pmatrix}
+	\qquad
+	\sigma^3 =
+	\begin{pmatrix}
+		1	&	0	\\
+		0	&	-1
+	\end{pmatrix}
+\end{equation*}
+
+
+
+They are Hermitian and
+
+\[ [ \Sigma^{a}, \Sigma^{b} ] = i \varepsilon _{abc} \Sigma ^{c}   \]
+
+\( f ^{abc} \) is the same of \( O(3) \) and there is correspondence between the matrices \( U \) and \( R \). Therefore, we can make an homomorphism \( O(3) \) versus \( SU(2) \):
+
+\[
+	\va{r} = \begin{pmatrix}
+	x	\\
+	y	\\
+	z
+	\end{pmatrix}
+	\longmapsto
+	h = \va{\sigma} \cdot \va{r} = x \sigma _{x} + y \sigma _{y} + z \sigma _{z}
+	=
+	\begin{pmatrix}
+	z   & x-iy \\
+	x+iy   & -z
+	\end{pmatrix}
+\]
+
+We know that \( r'_{i} = R_{ij} r_{j} \) and a matrix in \( SU(2) \) \( h' = UhU ^\dag \), therefore we can decompose these matrices as:
+
+\[
+h' = UhU ^\dag  = U r_j \sigma _j U ^\dag  = r_j U \sigma _j U ^\dag
+\]
+
+\begin{align*}
+	h' 	&= UhU ^\dag  = U r_j \sigma _j U ^\dag  = r_j U \sigma _j U ^\dag 	\\
+		&= \va{r}' \cdot \va{\sigma} = r'_k \sigma _k = R _{kj} r_{j} \sigma _k
+\end{align*}
+
+\begin{align*}
+	\Longrightarrow r_{j} U \sigma_{j} U ^\dag &= R_{kj} r_{j} \sigma _{k}	\\
+	\sigma_{i} R_{kj} \sigma _{k} &= \sigma _i U \sigma _j U ^\dag \\
+	R_{jk} \sigma _i \sigma _k &= \sigma _i U \sigma _j U ^\dag
+\end{align*}
+
+Now we use the property \( \tr(\sigma _i \sigma _k) = 2 \delta _{ik}   \) to obtain a correspondence between generators:
+
+\begin{equation}
+    R_{ij} = \frac{1}{2} \tr(\sigma _i U \sigma _j U ^\dag )
+    \label{eq:}
+\end{equation}
+
+Both \( U, -U \longmapsto \R \), so the correspondence is 2-to-1 and that's why it's not a isomorphism. Only \( SU(2) / \mathbb{Z} _{2} \simeq O(3) \) is an isomorphism (check on Costa-Fogli). We can use their common algebra to identify their irreducible representations. Let's take the angular momentum representations, their are characterized by:
+
+\begin{align*}
+	J^{2} \ket{j,m} &= j(j+1) \ket{j,m} \\
+	J_{z} \ket{j,m} &= m \ket{j,m}
+\end{align*}
+
+\( \forall j \) there are \( 2j +1 \) states, with \( -j \le m \le j \)
+
+Additional representation is equivalent to the composition of angular momenta:
+
+\[
+\ket{j_{1}, m_{1}} \otimes \ket{j_{2} , m_{2} } \equiv \ket{j_1, m_1, j_2, m_2}
+\]
+
+So:
+
+\[
+J_1 \otimes J_2 = \bigoplus _{J=\abs{j_1 - j_2}} ^{j_1 + j_2} J
+\]
+
+and in this case we get the irreducible representation (they are already block diagonal):
+
+\[
+    D^{j_1 j_2} (R) \equiv D(R)^{j_1} \otimes D(R)^{j_2} = D(R)^{j_1 + j_2} \oplus D(R)^{j_1 + j_2 -1} \oplus \dots \oplus  D(R)^{\abs{j_1 - j_2}}
+\]
+
+and we can decompose through the Clebsh-Gordan coefficients and we have to remember that \( j \) can be either integer or non-integer.
+
+\[
+    \ket{j_1, m_1, j_2, m_2}  = \sum_{\abs{j_1 - j_2} \le j \le j_1 + j_2 } \ket{J,M} \braket{J,M}{j_1,m_1,j_2,m_2}
+\]
+
+
+
+\subsection{3-D representation of \( SU(2) \): adjoint representation}
+Starting from the algebra and the commutators relations:
+\[
+    [\Sigma ^i, \Sigma ^j] = i \varepsilon _{ijk} \Sigma ^k
+\]
+\[
+    (\mathbb{T}^i)_{jk} \equiv i \varepsilon _{ijk}
+\]
+\[
+    \mathbb{T}^1 =
+	\begin{pmatrix}
+	0   & 0  & 0 \\
+	0   & 0  & -i \\
+	0   & i  & 0
+	\end{pmatrix}
+	\qquad
+	\mathbb{T}^2 =
+	\begin{pmatrix}
+	0   & 0  & i \\
+	0   & 0  & 0 \\
+	-i   & 0  & 0
+	\end{pmatrix}
+	\qquad
+	\mathbb{T}^3 =
+	\begin{pmatrix}
+	0   & -i  & 0 \\
+	i   & 0  & 0 \\
+	0   & 0  & 0
+	\end{pmatrix}
+\]
+
+They correspond to the \( J_i \) of \( O(3) \) (stranger link). The fundamental representation is \( 2 \times 2 \), this one (i.e. the adjoint) is \( 3 \times 3 \).
+
+
+
+
+
+\section{(Homogeneous) Lorentz group \(\mathcal{L}\)}
+Consider \( \Lambda \in O(1,3) \). They are the relativistic transformations between inertial frame of reference. If \( \mathbb{V} \) is the Minkowski space, then:
+
+\begin{equation}
+{x'}^{\mu} = \Lambda ^{\mu}_{\nu} x^{\nu} =
+  \begin{cases}
+	  \text{controvariant}	&	x^{\mu} = (x^0,x^1,x^2,x^3) = (ct, \va{x}) \\
+	  \text{covariant}	&	x_{\mu} = (x_0,-x_1,-x_2,-x_3) = (ct, -\va{x} )
+  \end{cases}
+\label{eq:}
+\end{equation}
+
+We want them to preserve the lenght on Minkowski space, i.e. \( {x'}^2 = x^2 \), where \( x^2 = x^{\mu}x_{\mu} = g_{\mu \nu} x^{\mu} x^{\nu} \) and \( g^{\mu}_{\ \nu} = \delta ^{\mu}{\ \nu} \). The invariance of the norm implies:
+
+\[
+    g_{\mu \nu} {x'}^{\mu} {x'}^{\nu} = g_{\mu \nu} \Lambda^{\mu}_{\ \rho} \\Lambda^{\nu}_{\ \sigma} x^{\rho} x^{\sigma} = g_{\rho \sigma } x^{\rho} x^\sigma
+\]
+\[
+    [1] \qquad
+	\Lambda^{\mu}_{\ \rho} g_{\mu \nu} \Lambda^{\nu}_{\ \sigma} = g_{\rho \sigma}
+	\iff
+	\Lambda ^{T} g \Lambda = g
+	\qquad [2]
+\]
+
+Taking the determinant of the equation [2], we get:
+\[
+    \det(\Lambda^{T} g \Lambda) = \det(g)
+	\Longrightarrow
+	\det(\Lambda ^{T}) \det(\Lambda) = 1
+	\qquad
+    (\det(\Lambda))^2 = 1
+\]
+
+So there is degeneration: \( \det(\Lambda) = \pm 1  \). If we take equation [2] with \( \rho =\sigma =0 \), we get:
+\[
+    (\Lambda^{0}_{\ 0})^2 - \sum (\Lambda^{i}_{\ 0} )^2 = g_{00} = 1
+	\Longrightarrow
+	(\Lambda^{0}_{\ 0} )^2 \ge 1
+	\Longrightarrow
+	\begin{cases}
+		\Lambda^{0}_{\ 0} \ge 1	\\
+		\Lambda^{0}_{\ 0} \le -1
+	\end{cases}
+\]
+
+Therefore there are 4 (disjoint) disconnected subsets.
+
+We show now that \( \mathcal{L} \) is a group by verifing the three properties:
+\begin{itemize}
+	\item \( \Lambda_1, \Lambda_2 \in \mathcal{L}	\Longrightarrow \Lambda_3 = \Lambda_1 \Lambda_2 \in \mathcal{L} \):\\
+	\( (\Lambda _1 \Lambda _2 )^T g (\Lambda _1 \Lambda _2) = \Lambda _2 ^t \Lambda _1 ^T g \Lambda _1 \Lambda _2 = g \)
+
+	\item \( e = \mathbbm{1}_{4 \times 4} \in \mathcal{L} \qquad \mathbbm{1}^T g \mathbbm{1} =g \)
+
+	\item Inverse: \( \Lambda ^{-1} \)\\
+	\( \Lambda ^{-1 \ T} g \Lambda ^{-1} = g \iff  \Lambda^{\mu}_{\ \alpha} g_{\mu \nu} \Lambda^{\nu}_{\ \beta} = g_{\alpha \beta}	\qquad [3]  \)\\
+	\( (\Lambda ^{-1})^T \Lambda ^T g \Lambda \Lambda^{-1} = (\Lambda ^{-1})^T g \Lambda ^{-1}	\Longrightarrow \Lambda ^{-1} \in \mathcal{L}  \)
+\end{itemize}
+
+In order to find the explicit form of \( \Lambda ^{-1} \), we have to rewrite [3] and remember that \( g_{\mu \nu} \Lambda^{\mu}_{\ \alpha} = \Lambda_{\mu \alpha}  \):
+
+\begin{align*}
+	g_{\mu \nu} \Lambda^{\mu}_{\ \alpha} \Lambda^{\nu}_{\ \beta} &= g_{\alpha \beta}	\\
+	\Lambda _{\nu \alpha} \Lambda^{\nu}_{\ \beta} &= g_{\alpha \beta} \\
+	\Lambda _{\nu}^{\ \alpha} \Lambda^{\nu}_{\ \beta} &= g^{\alpha}_{\ \beta} = \delta^{\alpha}_{\ \beta} \Longrightarrow (\Lambda ^{-1})^{\alpha}_{\ \nu} = \Lambda^{\nu}_{\ \beta}
+\end{align*}
+
+\begin{equation*}
+	\Lambda^{\mu}_{\ \nu} =
+	\left(
+	\begin{array}{c|c}
+		\Lambda^{0}_{\ 0} &	\begin{matrix} \Lambda^{0}_{\ 1} & \Lambda^{0}_{\ 2} & \Lambda^{0}_{\ 3} \end{matrix}	\\
+		\hline
+		\begin{matrix} \Lambda^{1}_{\ 0} \\ \Lambda^{2}_{\ 0} \\ \Lambda^{3}_{\ 0} \end{matrix}	&	\Lambda^{i}_{\ j}
+	\end{array}
+	\right)
+	\longrightarrow (\Lambda ^{-1})^{\mu}_{\ \nu} = \Lambda_{\nu}^{\ \mu } =
+	\left(
+	\begin{array}{c|c}
+		\Lambda^{0}_{\ 0} &	\begin{matrix} -\Lambda^{1}_{\ 0} & -\Lambda^{2}_{\ 0} & -\Lambda^{3}_{\ 0} \end{matrix}	\\
+		\hline
+		\begin{matrix} -\Lambda^{0}_{\ 1} \\ -\Lambda^{0}_{\ 2} \\ -\Lambda^{0}_{\ 3} \end{matrix}	&	(\Lambda^{i}_{\ j})^T
+	\end{array}
+	\right)
+\end{equation*}
+
+
+\end{document}

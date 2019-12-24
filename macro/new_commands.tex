@@ -1,0 +1,60 @@
+% Derivatives
+\renewcommand{\d}[0]{\mathrm{d}}
+\newcommand{\dev}[2]{\displaystyle \frac{\d #1}{\d #2}}
+\newcommand{\pdev}[2]{\displaystyle \frac{\partial #1}{\partial #2}}
+\newcommand{\ndev}[3]{\displaystyle \frac{\d^{#3} #1}{\d #2^{#3} } }
+\newcommand{\npdev}[3]{\displaystyle \frac{\partial^{#3} #1}{\partial #2^{#3} } }
+
+%% Math operators
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\sign}{sign}
+
+%% Norms
+\newcommand{\absvec}[1]{| \vec{#1} |}
+\newcommand{\normvec}[1]{|\!| #1 |\!|}
+
+%% User defined commands
+\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\newcommand{\hlfancy}[2]{\sethlcolor{#1}\hl{#2}}
+
+%% User defined math commands
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\vmed}[1]{\left \langle #1 \right \rangle}
+\newcommand{\vmedvec}[1]{\langle #1 \rangle}
+\newcommand{\id}{\mathbbm{1}}
+\renewcommand{\exp}[1]{\operatorname{e}^{#1}}
+\renewcommand{\H}[0]{\operatorname{H}}
+\renewcommand{\Re}[1]{\operatorname{\mathbb{R}e}\left[ #1 \right]}
+\renewcommand{\Im}[1]{\operatorname{\mathbb{I}m}\left[ #1 \right]}
+
+%% Theorem environment
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{axiom}{Axiom}
+\newtheorem{postulate}{Postulate}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+
+%% TikZ
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char){#1};}}
+
+%Evidenziare testo
+\newcommand\mybox[1]{%
+  \fbox{\begin{minipage}{0.9\textwidth}#1\end{minipage}}}
+
+%Spiegazioni/verifiche
+\newenvironment{greenbox}{\begin{mdframed}[hidealllines=true,backgroundcolor=green!20,innerleftmargin=3pt,innerrightmargin=3pt]}{\end{mdframed}}
+\newenvironment{bluebox}{\begin{mdframed}[hidealllines=true,backgroundcolor=blue!10,innerleftmargin=3pt,innerrightmargin=3pt]}{\end{mdframed}}
+\newenvironment{yellowbox}{\begin{mdframed}[hidealllines=true,backgroundcolor=yellow!20,innerleftmargin=3pt,innerrightmargin=3pt]}{\end{mdframed}}
+\newenvironment{redbox}{\begin{mdframed}[hidealllines=true,backgroundcolor=red!20,innerleftmargin=3pt,innerrightmargin=3pt]}{\end{mdframed}}
+\newenvironment{orangebox}{\begin{mdframed}[hidealllines=true,backgroundcolor=orange!20,innerleftmargin=3pt,innerrightmargin=3pt]}{\end{mdframed}}

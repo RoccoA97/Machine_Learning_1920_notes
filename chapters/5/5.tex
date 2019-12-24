@@ -1,0 +1,64 @@
+\providecommand{\main}{../../main}
+\providecommand{\figpath}[1]{\main/../lessons/#1}
+\documentclass[../../main/main.tex]{subfiles}
+
+
+
+\begin{document}
+
+\subsection{Irreducible representations of \( \mathcal{P}^{\uparrow}_{+} \) }
+For physical applications, we are interested in those irreducible representations in which the operators \( P_\mu \) and \( M_{\mu \nu} \) are hermitian, since they correspond to dynamical variables, i.e. in the unitary and hence infinite-dimensional irreducible representations of the Poincaré group \( \mathcal{P} \), with a particular concern on the restricted group \( \mathcal{P}^{\uparrow}_{+} \).
+
+We consider now a state \( \ket{j,m}  \) and we apply the operators \( P^\mu \) and \( P^2 \) to it:
+\begin{subequations}
+    \begin{align}
+        P^\mu \ket{j,m}  &= p^\mu \ket{j,m} \\
+        P^2 \ket{j,m} &= M^2 \ket{j,m}
+    \end{align}
+    \label{}
+\end{subequations}
+where \( p^\mu \) and \( M^2 \) are the corresponding eigenvalues. In particular, \( M^2 \) is related to the mass of a particle. There are two cases to analyze:
+
+\begin{itemize}
+    \item \( \bm{p^2 = m^2 > 0} \):\\
+        In this case \( \frac{p_0}{\abs{p_0} } \), namely the sign of hte energy, is also an invariant of the group \( \mathcal{P}^{\uparrow }_+ \). In the four-momentum space, the eigenstates of \( p^2 = m^2 > 0 \) with \( p_0 > 0 \), which correspond to physical states, are represented by the points in the upper branch of the hyperboloid in fig. \ref{fig:HYP}.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.4\textwidth]{\figpath{5}/images/hyp.PNG}
+            \caption{\label{fig:HYP} Hyperboloid \( p^2 = m^2 \) in the four-momentum space.}
+        \end{figure}
+        Under a transformation of \( \mathcal{P}^{\uparrow}_+ \) the representative point moves on the same branch of the hyperboloid.
+
+        The physical meaning of \( W_\mu \) is made clear by considering its components:
+        \begin{subequations}
+            \begin{align}
+                W_0 &= \va{P} \cdot \va{J}  \\
+                \va{W} &= P_0 \va{J} - \va{P} \times \va{K}
+            \end{align}
+            \label{}
+        \end{subequations}
+        It is convenient to go to a special frame, i.e. the rest frame where \( \va{p} = 0 \). We have:
+        \[
+            W^\mu = m (0,J^1,J^2,J^3) = m (0,\va{J} )
+        \]
+        so \( W^\mu \) reduces to the components of the total angular momentum \( \va{J} \), which is the spin in case of a particle. By computing \( W^2 \):
+        \[
+            W^2 = W^\mu W_\mu = - m^2 \va{J} \cdot \va{J} = - m^2 \va{J} ^2
+        \]
+        Taking a state \( \ket{p,j_3}  \), we have:
+        \begin{subequations}
+            \begin{align}
+                W_3 \ket{p,j_3}  &= mj_3 \ket{p,j_3}    \\
+                W^2 \ket{p,j_3} &=  -m^2 j(j+1) \ket{p,j_3}
+            \end{align}
+            \label{}
+        \end{subequations}
+        If the physical system is a particle, \( m \) is the mass of the paticle, which will be identified by \( m^2, j, j_3 \).
+
+    \item \( \bm{p^2 = 0} \Longrightarrow \textbf{Massless case}\)\\
+        There isn't a rest frame of reference, but there is a special one such that \( p^\mu = (\overbrace{p_0}^{\omega _0}, 0, 0, \overbrace{p_0}^{\omega _0} ) \) and \( p^2 = 0 \). Since we are interested in the physical case of a massless particle, we take also \( W^2 = 0 \), so \( W^\mu = (W^0,W^1,) \)
+\end{itemize}
+
+
+
+\end{document}
