@@ -15,7 +15,69 @@ In this Chapter we will develop a more general tool, namely the \emph{uniform co
 
 
 \section{Uniform convergence is sufficient for learnability}
+Given a hypothesis class \( \mathcal{H} \), the ERM learning algorithm:
+\begin{itemize}
+    \item Receives a training sample \( S \).
+	\item The learner evaluates the risk of each \( h \in \mathcal{H} \) on the given sample \( S \).
+	\item The learner outputs a member \( h^* \) of \( \mathcal{H} \) that minimizes this empirical risk.
+	\item The hope is that a \( h \) that minimizes the empirical risk with respect to \( S \) is a risk minimizer with respect to the true data probability distribution as well.\\
+	For that, it sufficies to ensure that the empirical risks of all members of \( \mathcal{H} \) are good approximations of their true risk.
+\end{itemize}
 
+In other words, we need that uniformly over all hypoteses in the hypotesis class, the empirical risk will be close to the true risk. This is formalized in the following definition. Then, a lemma introduces us to a first result.
+
+\begin{definition}[\( \varepsilon \)-representative sample]
+	A training set \( S \) is called \( \varepsilon \)-representative (with respect to domain \( Z \), hypothesis class \( \mathcal{H} \), loss function \( \ell \), and distribution \( \mathcal{D} \)) if:
+
+	\begin{equation}
+	    \forall h \in \mathcal{H}, \
+		\abs{L_S(h) - L_{\mathcal{D}}(h)}
+		\le
+		\varepsilon
+	    \label{eq:C3_ERS}
+	\end{equation}
+\end{definition}
+
+\begin{lemma}[]
+	Assume that a training set \( S \) is \( \frac{\varepsilon}{2} \)-representative (with respect to domain \( Z \), hypothesis class \( \mathcal{H} \), loss function \( \ell \), and distribution \( \mathcal{D} \)).
+	Then any output of ERM$_{\mathcal{H}}(S)$, namely, any \( h_S \in \operatorname{argmin}_{h \in \mathcal{H}} L_S(h) \), satisfies:
+
+	\begin{equation}
+	    L_{\mathcal{D}}(h_S)
+		\le
+		\underset{h \in \mathcal{H}}{\min{}} L_{\mathcal{D}}(h) + \varepsilon
+	    \label{eq:C3_HERL}
+	\end{equation}
+\end{lemma}
+
+\begin{proof}
+	For every \( h \in \mathcal{H} \):
+
+	\[
+	    L_{\mathcal{D}}(h_S)
+		\le
+		L_S(h_S) + \frac{\varepsilon}{2}
+		\le
+		L_S(h) + \frac{\varepsilon}{2}
+		\le
+		L_{\mathcal{D}}(h) + \frac{\varepsilon}{2} + \frac{\varepsilon}{2}
+		=
+		L_{\mathcal{D}}(h) + \varepsilon
+	\]
+\end{proof}
+
+The consequence of this lemma is that, if with probability \( 1 - \delta \), a random training set \( S \) is \( \varepsilon \)-representative, then the ERM rule is an agnostic PAC learner. The uniform convergence condition formalizes this requirement.
+
+\begin{definition}[Uniform convergence]
+	A hypothesis calss \( \mathcal{H} \) has the \emph{uniform convergence property} (with respect to a domain \( Z \) and a loss function \( \ell \))
+	if there exists a function \( m_{\mathcal{H}}^{\text{UC}} \ : \ (0,1)^2 \to \mathbb{N} \) such that for every \( \varepsilon, \delta \in (0,1) \)
+	and for every probability distribution \( \mathcal{D} \) over \( Z \), if \( S \) is a sample of \( m \ge m_{\mathcal{H}}^{\text{UC}}(\varepsilon,\delta ) \) examples drawn i.i.d. according to \( \mathcal{D} \),
+	then, with probability of at least \( 1 - \delta \), \( S \) is \( \varepsilon \)-representative.
+\end{definition}
+
+\begin{corollary}[]
+	If a class
+\end{corollary}
 
 
 

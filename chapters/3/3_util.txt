@@ -1,0 +1,2 @@
+C3_ERS  = Epsilon-Representative Sample
+C3_HERL = Half-Epsilon-Representative Lemma
