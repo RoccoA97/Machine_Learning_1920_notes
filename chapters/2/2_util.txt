@@ -1,0 +1,12 @@
+C2_TER  = True Error Revised
+C2_ER   = Empirical Risk
+C2_BOP  = Bayes Optimal Predictor
+C2_BOPB = Bayes Optimal Predictor Bound
+C2_APL  = Agnostic PAC Learning
+C2_ESD  = Expected Square Difference
+C2_RF   = Risk Function
+C2_ERG  = Empirical Risk Generalized
+C2_01L  = 0-1 Loss
+C2_SL   = Square Loss
+C2_AVL  = Absolute Value Loss
+C2_APLG = Agnostic PAC Learning with Generalized loss
