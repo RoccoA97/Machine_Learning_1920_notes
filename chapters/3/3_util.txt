@@ -1,2 +1,5 @@
 C3_ERS  = Epsilon-Representative Sample
 C3_HERL = Half-Epsilon-Representative Lemma
+C3_UCSC = Uniform Convergence Sample Complexity
+C3_ALSC = Agnostic Learnability Sample Complexity
+C3_HI   = Hoeffding's Inequality

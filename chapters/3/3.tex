@@ -76,10 +76,147 @@ The consequence of this lemma is that, if with probability \( 1 - \delta \), a r
 \end{definition}
 
 \begin{corollary}[]
-	If a class
+	If a class \( \mathcal{H} \) has the uniform convergence property with a function \( m_{\mathcal{H}}^{\text{UC}} \),
+    then the class is agnostically PAC learnable with the sample complexity \( m_{\mathcal{H}}(\varepsilon, \delta) \le m_{\mathcal{H}}^{\text{UC}}(\frac{\varepsilon}{2},\delta) \).
+    Furthermore, in that case, the ERM$_{\mathcal{H}}$ paradigm is a successful agnostic PAC learner for \( \mathcal{H} \).
 \end{corollary}
 
 
 
+
+
+\section{Finite classes are agnostic PAC learnable}
+Let's start with a lemma that will be useful to give a proof of a subsequent theorem.
+
+\begin{lemma}[Hoeffding's inequality]
+    \label{lem:C3_HI}
+    Let \( \theta_1, \dots, \theta_m \) be a sequence of i.i.d. random variables and assume that \( \forall i, \ \mathbb{E}[\theta_i] = \mu \) and \( \mathbb{P}[a \le \theta_i \le b] = 1 \). Then for any \( \varepsilon > 0 \):
+
+    \begin{equation}
+        \mathbb{P} \left[ \abs{\frac{1}{m} \sum_{i=1}^{m} \theta_i - \mu } > \varepsilon \right]
+        \le
+        2 e^{- \frac{2m \varepsilon^2}{(b-a)^2}}
+        \label{eq:C3_HI}
+    \end{equation}
+\end{lemma}
+
+\begin{theorem}
+    Let \( \mathcal{H} \) be a finite hypothesis class, let \( Z \) be a domain, and let \( \ell \ : \ \mathcal{H} \times Z \to [0,1] \) be a loss function.
+    Then:
+    \begin{itemize}
+        \item \( \mathcal{H} \) enjoys the uniform convergence property with sample complexity:
+
+            \begin{equation}
+                m_{\mathcal{H}}^{\text{UC}}(\varepsilon, \delta)
+                \le
+                \ceil{\frac{\log{\left(\frac{2 \abs{\mathcal{H}}}{\delta}\right)}}{2 \varepsilon^2}}
+                \label{eq:C3_UCSC}
+            \end{equation}
+
+        \item \( \mathcal{H} \) is agnostically PAC learnable using the ERM algorithm with sample complexity:
+
+            \begin{equation}
+                m_{\mathcal{H}}(\varepsilon, \delta)
+                \le
+                m_{\mathcal{H}}^{\text{UC}}\left(\frac{\varepsilon}{2},\delta \right)
+                \le
+                \ceil{\frac{2 \log{\left(\frac{2 \abs{\mathcal{H}}}{\delta}\right)}}{\varepsilon^2}}
+                \label{eq:C3_ALSC}
+            \end{equation}
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    Let's give the proof of the previous theorem by steps.
+    \begin{itemize}
+        \item[$\triangleright$]
+            \( \displaystyle \mathcal{D}^m (\{ S \ : \ \forall h \in \mathcal{H}, \ \abs{L_S(h) - L_{\mathcal{D}}(h)} \le \varepsilon \})
+            \ge
+            1 - \delta \)
+
+        \item[$\triangleright$]
+            \( \displaystyle \mathbb{P}_{\text{bad}}
+            =
+            \mathcal{D}^m (\{ s \ : \ \exists h \in \mathcal{H}, \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \})
+            \le
+            \delta \)
+
+        \item[$\triangleright$]
+            \( \displaystyle \{ S \ : \ \exists h \in \mathcal{H}, \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \}
+            =
+            \bigcup\limits_{h \in \mathcal{H}} \{ S \ : \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \} \)
+
+        \item[$\triangleright$] Union bound:\\
+            \( \displaystyle \mathcal{D}^m (\{ S \ : \ \exists h \in \mathcal{H}, \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \})
+            \le
+            \sum_{h \in \mathcal{H}} \mathcal{D}^m (\{ S \ : \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \}) \)
+
+        \item[$\triangleright$] We now demonstrate that for any fixed \( h \), the difference \( \abs{L_S(h) - L_{\mathcal{D}}(h)} \) is small enough.
+
+        \item[$\triangleright$] Recall that:
+
+            \begin{align*}
+                L_{\mathcal{D}}(h)  &= \underset{z \sim \mathcal{D}}{\mathbb{E}}[\ell(h,z)]  \\
+                L_S(h)              &= \frac{1}{m} \sum_{i=1}^{m} \ell(h,z_i)
+            \end{align*}
+
+            By the linearity of expectation, it follows that \( L_{\mathcal{D}}(h) \) is also the expected value of \( L_S(h) \). Hence, the quantity \( \abs{L_S(h) - L_{\mathcal{D}}(h)} \) is the deviation of the random variable \( L_S(h) \) from its expectation.\\
+            We need to show that the measure of \( L_S(h) \) is concentrated around its expectation value.
+
+        \item[$\triangleright$] Law of large numbers: if \( m \) is large, the average converges to the expectation.
+
+        \item[$\triangleright$] From Lemma \ref{lem:C3_HI} it follows:
+            \[
+                \mathcal{D}^m (\{ S \ : \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \})
+                =
+                \mathbb{P}\left[ \abs{\frac{1}{m} \sum_{i=1}^{m} \theta_i - \mu } > \varepsilon \right]
+                \le
+                2 e^{-2m \varepsilon^2}
+            \]
+
+        \item[$\triangleright$]
+            \( \displaystyle \sum_{h \in \mathcal{H}} \mathcal{D}^m (\{ S \ : \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \})
+            \le
+            \abs{\mathcal{H}} 2 e^{-2m \varepsilon^2}
+            =
+            \sum_{h \in \mathcal{H}} 2 e^{-2 m \varepsilon^2} \)
+
+        \item[$\triangleright$] We impose:
+            \[
+                \abs{\mathcal{H}} 2 e^{-2m \varepsilon^2}
+                \overset{!}{\le}
+                \delta
+                \Longrightarrow
+                m
+                \ge
+                \log{\left( \frac{2 \abs{\mathcal{H}}}{\delta} \right)} \frac{1}{2 \varepsilon^2}
+            \]
+            \[
+                \Longrightarrow
+                \sum_{h \in \mathcal{H}} \mathcal{D}^m (\{ S \ : \ \abs{L_S(h) - L_{\mathcal{D}}(h)} > \varepsilon \})
+                \le
+                \delta
+            \]
+    \end{itemize}
+\end{proof}
+
+\begin{remark}[The discretization trick]
+    There is a simple trick that allows us to get a good estimate of the practical sample complexity of infinite hypothesis class:
+    \begin{itemize}
+        \item Consider a hypothesis class determined by \( d \) real number parameters.
+        \item In principle, we have a hypothesis class of infinite size.
+        \item In practice, real numbers are represented with 64 bits double precision variables.
+        \item For \( d \) parameters: \( \abs{\mathcal{H}} = 2^{64 d} \), so \( \abs{\mathcal{H}} \) is larger but finite.
+        \item We have:
+            \[
+                m_{\mathcal{H}}(\varepsilon, \delta)
+                \le
+                m_{\mathcal{H}}^{\text{UC}} \left( \frac{\varepsilon}{2} \right)
+                \le
+                \frac{2 \log{\left( 2 \frac{2^{64d}}{\delta} \right)}}{\varepsilon^2}
+            \]
+        \item So the bound depends on the chosen number representation.
+    \end{itemize}
+\end{remark}
 
 \end{document}
