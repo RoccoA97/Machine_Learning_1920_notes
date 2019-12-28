@@ -1,0 +1,6 @@
+C4_ED   = Error Decomposition
+C4_EDAE = Error Decomposition Approximation Error
+C4_EDEE = Error Decomposition Estimation Error
+
+images
+C4_TVTS = Train Validation Test Sets
