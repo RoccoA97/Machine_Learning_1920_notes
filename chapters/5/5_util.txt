@@ -1,0 +1,13 @@
+C5_AF   = Affine Functions
+C5_AFH  = Affine Functions: Hypothesis
+C5_AFNN = Affine Functions New Notation
+C5_CH   = Class of Halfspaces
+C5_LPD  = Linear Programming Definition
+C5_LPCH = Linear Programming for Halfspaces Classes
+C5_T1P  = Theorem 1 Proof
+
+images
+C5_HG   = Halfspace Grid (example for d=2)
+
+algorithms
+C5_BPA  = Batch Perceptron Algorithm
